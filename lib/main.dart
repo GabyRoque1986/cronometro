@@ -6,7 +6,7 @@ import 'view/stopwatch_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await NotificationService.initialize(); // <- corrigido aqui
+  await NotificationService.initialize();
 
   runApp(
     ChangeNotifierProvider(
@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Cronômetro',
+      debugShowCheckedModeBanner: false, 
       home: StopwatchPage(),
     );
   }
