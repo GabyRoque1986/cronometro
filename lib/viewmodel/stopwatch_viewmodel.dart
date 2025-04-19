@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import '../model/lap.dart';  // Importação correta
+import '../model/lap.dart';
+import '../service/notification_service.dart';
 
 class StopwatchViewModel extends ChangeNotifier {
   late Timer _timer;
@@ -32,7 +33,7 @@ class StopwatchViewModel extends ChangeNotifier {
   }
 
   void resetTimer() {
-    _timer.cancel();
+    if (_isRunning) _timer.cancel();
     _milliseconds = 0;
     _laps.clear();
     _isRunning = false;
@@ -40,12 +41,22 @@ class StopwatchViewModel extends ChangeNotifier {
   }
 
   void recordLap() {
+    if (!_isRunning) return;
+
     final totalTime = _formatTime(_milliseconds);
     final lapTime = _laps.isEmpty
         ? totalTime
         : _formatTime(_milliseconds - _parseTime(_laps.last.totalTime));
 
     _laps.add(Lap(lapTime: lapTime, totalTime: totalTime));
+
+    // Notificação de volta
+    NotificationService.showNotification(
+      id: 0,
+      title: 'Nova Volta Registrada!',
+      body: 'Tempo da volta: $lapTime',
+    );
+
     notifyListeners();
   }
 

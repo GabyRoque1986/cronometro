@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'viewmodel/stopwatch_viewmodel.dart';  // Importação correta
-import 'view/stopwatch_page.dart';           // Importação correta
+import 'viewmodel/stopwatch_viewmodel.dart';
+import 'service/notification_service.dart';
+import 'view/stopwatch_page.dart';
 
-void main() {
-  runApp(CronometroApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.initialize(); // <- corrigido aqui
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => StopwatchViewModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
-class CronometroApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => StopwatchViewModel()), // Fornecendo o ViewModel
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Cronômetro de Voltas',
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: StopwatchPage(),  // Tela principal do cronômetro
-      ),
+    return MaterialApp(
+      title: 'Cronômetro',
+      home: StopwatchPage(),
     );
   }
 }

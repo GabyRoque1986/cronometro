@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../viewmodel/stopwatch_viewmodel.dart';  
+import '../viewmodel/stopwatch_viewmodel.dart';
+
+
 
 class StopwatchPage extends StatelessWidget {
   @override
@@ -16,7 +18,7 @@ class StopwatchPage extends StatelessWidget {
         titleTextStyle: TextStyle(
           fontSize: 48,
           fontWeight: FontWeight.bold,
-          fontFamily: 'Roboto', 
+          fontFamily: 'Roboto',
         ),
       ),
 
@@ -24,26 +26,30 @@ class StopwatchPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Texto do cronômetro
+          // Texto do cronômetro com Semantics
           Center(
-            child: Text(
-              stopwatchViewModel.currentTime,
-              style: TextStyle(
-                fontSize: 150,
-                fontWeight: FontWeight.bold,
-                color: const Color.fromARGB(255, 12, 11, 14),
+            child: Semantics(
+              label: 'Tempo atual do cronômetro',
+              value: stopwatchViewModel.currentTime,
+              child: Text(
+                stopwatchViewModel.currentTime,
+                style: TextStyle(
+                  fontSize: 100,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(255, 12, 11, 14),
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
           ),
 
-          SizedBox(height: 30), // Espaçamento entre o cronômetro e os botões
+          SizedBox(height: 30), // Espaço entre cronômetro e botões
 
-          // Linha com os três botões
+          // Linha com três botões
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Distribui os botões
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Botão Iniciar ou Pausar (Esquerda)
+              // Botão Iniciar / Pausar
               ElevatedButton(
                 onPressed: stopwatchViewModel.isRunning
                     ? stopwatchViewModel.pauseTimer
@@ -51,8 +57,8 @@ class StopwatchPage extends StatelessWidget {
                 child: Text(
                   stopwatchViewModel.isRunning ? 'Pausar' : 'Iniciar',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold, // Negrito
-                    color: Colors.black,         // Preto
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                     fontSize: 28,
                   ),
                 ),
@@ -64,15 +70,18 @@ class StopwatchPage extends StatelessWidget {
                 ),
               ),
 
-              // Botão Reiniciar (Meio)
+              // Botão Reiniciar com Semantics
               ElevatedButton(
                 onPressed: stopwatchViewModel.resetTimer,
-                child: Text(
-                  'Reiniciar',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold, // Negrito
-                    color: Colors.black,         // Preto
-                    fontSize: 28,
+                child: Semantics(
+                  label: 'Botão para reiniciar o cronômetro',
+                  child: Text(
+                    'Reiniciar',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 28,
+                    ),
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -81,16 +90,16 @@ class StopwatchPage extends StatelessWidget {
                 ),
               ),
 
-              // Botão Registrar Volta (Direita)
+              // Botão Registrar Volta
               ElevatedButton(
                 onPressed: stopwatchViewModel.isRunning
                     ? stopwatchViewModel.recordLap
-                    : null, // Desabilita se não estiver rodando
+                    : null,
                 child: Text(
                   'Registrar Volta',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold, // Negrito
-                    color: Colors.black,         // Preto
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                     fontSize: 28,
                   ),
                 ),
@@ -102,7 +111,7 @@ class StopwatchPage extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 20), // Espaçamento entre botões e lista
+          SizedBox(height: 20),
 
           // Lista de voltas
           Expanded(
