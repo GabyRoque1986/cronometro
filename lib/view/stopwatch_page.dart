@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodel/stopwatch_viewmodel.dart';
 
-
-
 class StopwatchPage extends StatelessWidget {
+  const StopwatchPage({super.key}) ; // 👈 Adicionei o key aqui
+
   @override
   Widget build(BuildContext context) {
     final stopwatchViewModel = Provider.of<StopwatchViewModel>(context);
@@ -13,9 +13,9 @@ class StopwatchPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 110, 142, 151),
         foregroundColor: const Color.fromARGB(255, 245, 243, 243),
-        title: Text(' Cronômetro '),
+        title: const Text(' Cronômetro '),
         centerTitle: true,
-        titleTextStyle: TextStyle(
+        titleTextStyle: const TextStyle(
           fontSize: 48,
           fontWeight: FontWeight.bold,
           fontFamily: 'Roboto',
@@ -33,17 +33,17 @@ class StopwatchPage extends StatelessWidget {
               value: stopwatchViewModel.currentTime,
               child: Text(
                 stopwatchViewModel.currentTime,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 100,
                   fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 12, 11, 14),
+                  color: Color.fromARGB(255, 12, 11, 14),
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
 
-          SizedBox(height: 30), // Espaço entre cronômetro e botões
+          const SizedBox(height: 30), // Espaço entre cronômetro e botões
 
           // Linha com três botões
           Row(
@@ -54,28 +54,34 @@ class StopwatchPage extends StatelessWidget {
                 onPressed: stopwatchViewModel.isRunning
                     ? stopwatchViewModel.pauseTimer
                     : stopwatchViewModel.startTimer,
-                child: Text(
-                  stopwatchViewModel.isRunning ? 'Pausar' : 'Iniciar',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: 28,
-                  ),
-                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: stopwatchViewModel.isRunning
                       ? Colors.red
                       : const Color.fromARGB(255, 80, 241, 88),
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+                ),
+                child: Container(
+                  color: Colors.blue,
+                  child: Text(
+                    stopwatchViewModel.isRunning ? 'Pausar' : 'Iniciar',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                    ),
+                  ),
                 ),
               ),
 
               // Botão Reiniciar com Semantics
               ElevatedButton(
                 onPressed: stopwatchViewModel.resetTimer,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+                ),
                 child: Semantics(
                   label: 'Botão para reiniciar o cronômetro',
-                  child: Text(
+                  child: const Text(
                     'Reiniciar',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -84,10 +90,6 @@ class StopwatchPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 25),
-                ),
               ),
 
               // Botão Registrar Volta
@@ -95,7 +97,11 @@ class StopwatchPage extends StatelessWidget {
                 onPressed: stopwatchViewModel.isRunning
                     ? stopwatchViewModel.recordLap
                     : null,
-                child: Text(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 59, 39, 129),
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+                ),
+                child: const Text(
                   'Registrar Volta',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -103,15 +109,11 @@ class StopwatchPage extends StatelessWidget {
                     fontSize: 28,
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 59, 39, 129),
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 25),
-                ),
               ),
             ],
           ),
 
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Lista de voltas
           Expanded(
