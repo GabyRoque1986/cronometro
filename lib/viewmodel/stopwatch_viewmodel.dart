@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import '../model/lap.dart';  // Importação correta
+import '../model/lap.dart';  
 
 class StopwatchViewModel extends ChangeNotifier {
   late Timer _timer;

@@ -1,30 +1,23 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test/flutter_test.dart' show WidgetTester, expect, find, findsNothing, findsOneWidget, testWidgets;
 
 import 'package:agoravaicronometro/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Iniciar cronômetro e verificar atualização do tempo', (WidgetTester tester) async {
+    // Constrói o app e executa um frame.
+    await tester.pumpWidget(CronometroApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verifica se o cronômetro inicia em "00:00:00".
+    expect(find.text('00:00:00'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // Pressiona o botão "Iniciar".
+    await tester.tap(find.text('Iniciar'));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Espera um tempo para o cronômetro atualizar.
+    await tester.pump(const Duration(seconds: 1));
+
+    // Verifica se o tempo foi atualizado (não deve mais ser "00:00:00").
+    expect(find.text('00:00:00'), findsNothing);
   });
 }

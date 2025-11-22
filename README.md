@@ -1,16 +1,29 @@
-# agoravaicronometro
+# Cronômetro de Voltas
 
-A new Flutter project.
+Este aplicativo mobile foi desenvolvido utilizando o **padrão de arquitetura MVVM (Model-View-ViewModel)**, garantindo separação clara entre a interface, a lógica de apresentação e os dados. O app funciona como um **cronômetro de voltas**, oferecendo recursos de **acessibilidade** e **notificações** para melhor experiência do usuário.
 
-## Getting Started
+O usuário pode **iniciar, pausar e reiniciar** o cronômetro, bem como **registrar várias voltas**. Cada volta registrada exibe o **tempo da volta** e o **tempo total decorrido**, organizados em uma lista dinâmica na interface, permitindo acompanhar facilmente o desempenho ao longo do tempo.  
 
-This project is a starting point for a Flutter application.
+Além disso, o aplicativo apresenta uma interface **intuitiva e responsiva**, adequada para diferentes tamanhos de tela, e inclui recursos de acessibilidade como **Semantics**, garantindo que usuários com necessidades especiais consigam interagir com o cronômetro de forma eficiente.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Funcionalidades
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Iniciar cronômetro  
+- Pausar cronômetro  
+- Reiniciar cronômetro  
+- Registrar voltas com tempo parcial e tempo total  
+- Exibir todas as voltas registradas em uma lista dinâmica  
+
+---
+
+## Capturas de Tela
+
+**Iniciar / Pausar / Parar:**
+
+![Iniciar](assets/imagens/iniciar.jpg)  
+![Pausar](assets/imagens/pausar.jpg)  
+![Parar](assets/imagens/parar.jpg)
+
+
